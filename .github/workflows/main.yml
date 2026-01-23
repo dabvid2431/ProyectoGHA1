@@ -1,36 +1,20 @@
-# archivo de configuración para GitHub Actions
-# nombre del workflow
-name: DevOps
+[cite_start]name: Flujo_trabajo [cite: 10]
 
-# controles cuando el workflow corra
 on:
-  # Triggers cuando haya un push o una solicitud de pull request en la rama "main" 
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Permite que el workflow se ejecute manualmente desde la pestaña de Actions en GitHub
-  workflow_dispatch:
-
+    branches:
+      - [cite_start]main [cite: 12, 13, 14, 15]
 
 jobs:
-  # Este workflow contiene un job llamado "build"
-  build:
-    # Este job se ejecutará en un runner con el sistema operativo Ubuntu (la última versión disponible)
-    runs-on: ubuntu-latest
-
-    # Tareas individuales que se ejecutaran en el job
+  [cite_start]example-job: [cite: 18, 20]
+    [cite_start]runs-on: ubuntu-latest [cite: 22]
+    
     steps:
-      # Clona el repositorio en el runner para que los siguientes steps tengan acceso al código
-      - uses: actions/checkout@v4
+      - [cite_start]name: Checkout code [cite: 26]
+        [cite_start]uses: actions/checkout@v3 [cite: 27]
 
-      # Ejecuta el comando echo Prueba, CI, que simplemente imprime "Prueba, CI" en la consola
-      - name: Run a one-line script
-        run: echo Prueba, CI
-
-      # Ejecuta dos comandos echo en secuencia. El primer comando imprime "Add other actions to build," y el segundo imprime "test, and deploy your project." en la consola
-      - name: Run a multi-line script
+      - [cite_start]name: Use Personal Access Token [cite: 63]
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          curl -H "Authorization: Bearer ${{ secrets.PATH_SECRET }}" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/user/repos [cite: 65, 66, 67, 68]
